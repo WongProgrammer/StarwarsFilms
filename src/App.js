@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import StarwarsFilmList from './Components/StawarsFilmList';
+import Loading from './Components/Loading';
+
+const url = "https://swapi.dev/api/films"
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [starwarsFilms, setStarwarsFilms] = useState([]);
+
+  const fetchStarwarsFilms = async () => {
+    try {
+      const response = await fetch(url);
+      const starwarsFilms = await response.json();
+      setLoading(false);
+      setStarwarsFilms(starwarsFilms.results.sort((a,b) => a.episode_id - b.episode_id));
+      // console.log(starwarsFilms.results);
+      // console.log(this.state.starwarsFilms)
+    } catch(error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStarwarsFilms();
+  }, []);
+  if(loading) {
+    return (
+      <main>
+        <Loading/>
+      </main>
+    )
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+     <StarwarsFilmList
+      films={starwarsFilms}
+     />
+    </main>
   );
 }
 
