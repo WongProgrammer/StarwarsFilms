@@ -1,4 +1,30 @@
 img {
-  height: 512px;
-  width: 384px;
+height: 15%;
+width: 15%;
+display: inline-block;
 }
+
+h1 {
+  color: #feda4a;
+}
+
+h3 {
+  color: #feda4a;
+}
+
+h4 {
+  color: #feda4a;
+}
+
+
+h5 {
+  color: #feda4a;
+}
+
+p {
+  color: #feda4a;
+}
+
+body {
+  background-image: url("https://i.pinimg.com/originals/4a/a9/9b/4aa99b6ad2d2cbc7cb04a41571885a8f.jpg");
+ }

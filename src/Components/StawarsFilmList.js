@@ -1,9 +1,11 @@
+import { Stack, Typography } from '@mui/material';
 import React from 'react';
 import StarwarsFilm from './StarwarsFilm';
-function StarwarsFilmList({ films }) {
+function StarwarsFilmList({ films, removeStarwarsFilm }) {
   return (
-    <div>
-      <h1>Starwars Films</h1>
+    <>
+      <Typography variant='h1' align='center'>STARWARS FILMS</Typography>
+      <Stack spacing={2} >
       {films.map((film) => {
         return (
           <StarwarsFilm
@@ -12,10 +14,12 @@ function StarwarsFilmList({ films }) {
             title={film.title}
             opening={film.opening_crawl}
             date={film.release_date}
+            removeStarwarsFilm={removeStarwarsFilm}
           />
         );
       })}
-    </div>
+      </Stack>
+    </>
   );
 }
 export default StarwarsFilmList;
