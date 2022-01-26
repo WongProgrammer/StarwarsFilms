@@ -2,7 +2,9 @@ import React from 'react';
 import { CircularProgress } from '@mui/material';
 
 function Loading() {
-  return <CircularProgress />;
+  return <CircularProgress sx={{
+    fontSize: 50,
+  }} />;
 }
 
 export default Loading;

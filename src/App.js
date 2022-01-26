@@ -13,6 +13,7 @@ function App() {
 
   const fetchStarwarsFilms = async () => {
     try {
+      setLoading(true);
       const response = await fetch(url);
       const starwarsFilms = await response.json();
       setLoading(false);
@@ -26,8 +27,6 @@ function App() {
 
   const removeStarwarsFilm = (id) => {
     const newStarwarsFilms = starwarsFilms.filter((film) => film.episode_id !== id);
-    console.log(id)
-    console.log(newStarwarsFilms)
     setStarwarsFilms(newStarwarsFilms);
   }
 
@@ -50,8 +49,38 @@ function App() {
         </Box>
 
       </Container>
-    )
+    );
   }
+
+  if (starwarsFilms.length === 0) {
+    return (
+      <Box
+        display="flex"
+        width='auto' height={80}
+        alignItems="center"
+        justifyContent="center"
+
+      >
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: 'rgba(125, 245, 185,0.3)',
+            '&:hover': {
+              backgroundColor: "rgba(0,255,127, 0.3)"
+            }
+          }}
+          onClick={fetchStarwarsFilms}>
+          <RefreshOutlinedIcon
+            sx={{
+              fontSize: 50,
+
+            }} />
+        </Button>
+      </Box>
+    );
+
+  }
+
   return (
     <Container
       maxWidth="xl"
@@ -61,29 +90,6 @@ function App() {
         removeStarwarsFilm={removeStarwarsFilm}
         refreshList={fetchStarwarsFilms}
       />
-
-      <Box
-        display="flex"
-        width='auto' height={80}
-        alignItems="center"
-        justifyContent="center"
-        
-      >
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: 'rgba(125, 245, 185,0.3)',
-          '&:hover': {
-            backgroundColor: "rgba(0,255,127, 0.3)"} }}
-          onClick={fetchStarwarsFilms}>
-          <RefreshOutlinedIcon
-            sx={{
-              fontSize: 50,
-              
-            }} />
-        </Button>
-      </Box>
-
-
     </Container>
   );
 }
